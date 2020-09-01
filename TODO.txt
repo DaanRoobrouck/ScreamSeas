@@ -1,0 +1,21 @@
+Submarine in een grot 
+Ge zit vast en uw submarine is kapot
+intro cutscene is fade in/out black (ge zit in een storm en uw duikboot is kapot)
+
+Hoe maken we cave exploring fun? 
+-Splitsingen met geluiden die uit een cave komen
+Ar
+
+Takenlijst:
+-Texture submarine
+-Aanvullen level
+-aankleden level
+-Triggers plaatsen voor sound en jumpscares
+-particles maken
+-sound implementeren
+-FPCC fixen
+-cutscene 'aan elkaar plakken' (evt eerst een schets)
+-Glowsticks implementeren (ge kunt ze oprapen, ge hebt een gelimiteerd aantal sticks)
+-Kannibalenprops maken (ventje, houten pieken, touwen, afschrikwekkende totems)
+-houten balken
+-stenen fixen
