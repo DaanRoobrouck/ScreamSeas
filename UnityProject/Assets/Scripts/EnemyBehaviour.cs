@@ -10,9 +10,11 @@ public class EnemyBehaviour : MonoBehaviour
 
     [SerializeField] private float _movementSpeed = 5f;
     [SerializeField] private float _waitTime = 5f;
+    [SerializeField] private float _deadTime = 2f;
     [SerializeField] private float _fieldOfViewAngle = 120f;
     [SerializeField] private float _detectRange = 3f;
     [SerializeField] private FirstPersonAIO _player;
+    [SerializeField] private Transform _enemy;
 
     private Transform _gotoWaypoint;
     private int _currentIndex = 1;
@@ -21,6 +23,7 @@ public class EnemyBehaviour : MonoBehaviour
     private bool _walkForwards = true;
 
     private bool _foundPlayer = false;
+    private bool _killedPlayer = false;
 
     private UIManager _uiManager;
 
@@ -32,59 +35,91 @@ public class EnemyBehaviour : MonoBehaviour
 
     void Update()
     {
-        if (_foundPlayer)
+        if (!_killedPlayer)
         {
-            WalkToPlayer();
-        }
-        else
-        {
-            CheckForPlayer();
-            if (!_hasLooked)
+            if (_foundPlayer)
             {
-                LookAtNextWaypoint();
+                WalkToPlayer();
             }
-            else if (_canWalk)
+            else
             {
-                WalkToNextWaypoint();
+                CheckForPlayer();
+                if (!_hasLooked)
+                {
+                    LookAtNextWaypoint();
+                }
+                else if (_canWalk)
+                {
+                    WalkToNextWaypoint();
+                }
             }
-        }
-     
+        } 
     }
 
     private void WalkToPlayer()
     {
-        transform.position = Vector3.Lerp(transform.position, _gotoWaypoint.position, _movementSpeed * Time.deltaTime);
-        transform.LookAt(_player.transform);
+        _enemy.transform.position = Vector3.MoveTowards(_enemy.transform.position, _player.transform.position, _movementSpeed * Time.deltaTime);
+        _enemy.transform.LookAt(_player.transform);
 
-        if (Vector3.Distance(transform.position, _gotoWaypoint.position) < 0.1f)
+        if (!_player.Targetable)
         {
-            _uiManager.Dead();
+            _foundPlayer = false;
         }
+
+        if (Vector3.Distance(_enemy.transform.position, _player.transform.position) < 1f)
+        {
+            _killedPlayer = true;
+            _player.playerCanMove = false;
+            _player.enableCameraMovement = false;
+            _player.transform.LookAt(_enemy.transform.GetChild(0).transform);
+            StartCoroutine(ShowDeadScreen());        
+        }
+    }
+
+    private void ResetEnemy()
+    {
+        _foundPlayer = false;
+        _enemy.transform.position = _waypoints[0].position;
+        _enemy.transform.rotation = _waypoints[0].rotation;
+
+        _currentIndex = 0;
+        _gotoWaypoint = _waypoints[0];
+
+        _killedPlayer = false;
+    }
+
+    private IEnumerator ShowDeadScreen()
+    {
+        yield return new WaitForSeconds(_deadTime);
+        _uiManager.Dead();
+        ResetEnemy();
     }
 
     private void CheckForPlayer()
     {
-        Vector3 direction = _player.transform.position - transform.position;
-        float angle = Vector3.Angle(direction, transform.forward);
-        float distance = Vector3.Distance(transform.position, _player.transform.position);
+        Vector3 direction = _player.transform.position - _enemy.transform.position;
+        float angle = Vector3.Angle(direction, _enemy.transform.forward);
+        float distance = Vector3.Distance(_enemy.transform.position, _player.transform.position);
 
         if (_player.Targetable & angle <= _fieldOfViewAngle * 0.5f && distance <= _detectRange)
         {
             _foundPlayer = true;
+
+            //play sound
         }
     }
 
     private void WalkToNextWaypoint()
     {
-        transform.position = Vector3.Lerp(transform.position, _gotoWaypoint.position, _movementSpeed * Time.deltaTime);
+        _enemy.transform.position = Vector3.MoveTowards(_enemy.transform.position, _gotoWaypoint.position, _movementSpeed * Time.deltaTime);
 
-        if (Vector3.Distance(transform.position, _gotoWaypoint.position) < 0.1f)
+        if (Vector3.Distance(_enemy.transform.position, _gotoWaypoint.position) < 0.1f)
         {
-            if (_gotoWaypoint = _waypoints[_waypoints.Length])
+            if (_gotoWaypoint == _waypoints[_waypoints.Length - 1])
             {
                 _walkForwards = false;
             }
-            else if (_gotoWaypoint = _waypoints[0])
+            else if (_gotoWaypoint == _waypoints[0])
             {
                 _walkForwards = true;
             }
@@ -106,7 +141,7 @@ public class EnemyBehaviour : MonoBehaviour
 
     private void LookAtNextWaypoint()
     {
-        transform.rotation = Quaternion.Lerp(transform.rotation, _gotoWaypoint.rotation, _movementSpeed * Time.deltaTime);
+        _enemy.transform.LookAt(_gotoWaypoint.transform);
 
         StartCoroutine(StartMoving());
     }

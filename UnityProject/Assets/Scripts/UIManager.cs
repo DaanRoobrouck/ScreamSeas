@@ -15,6 +15,9 @@ public class UIManager : MonoBehaviour
         _deadPanel.SetActive(true);
 
         //Player
+        _player.transform.position = _waypointManager.ActiveWaypoint.position;
+        _player.transform.rotation = _waypointManager.ActiveWaypoint.rotation;
+
         _player.enableCameraMovement = false;
         _player.playerCanMove = false;
 
@@ -28,8 +31,7 @@ public class UIManager : MonoBehaviour
         _deadPanel.SetActive(false);
 
         //Player
-        _player.transform.position = _waypointManager.transform.position;
-        _player.transform.rotation = _waypointManager.transform.rotation;
+
 
         _player.enableCameraMovement = true;
         _player.playerCanMove = true;

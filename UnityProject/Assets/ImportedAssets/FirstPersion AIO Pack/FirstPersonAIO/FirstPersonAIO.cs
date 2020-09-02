@@ -499,7 +499,7 @@ public class FirstPersonAIO : MonoBehaviour {
 
         #endregion
         if (IsInWater)
-            fps_Rigidbody.velocity = (transform.forward * inputXY.y * speed + transform.right * inputXY.x * walkSpeedInternal);
+            fps_Rigidbody.velocity = (Camera.main.transform.forward * inputXY.y * speed /*+ transform.right * inputXY.x * walkSpeedInternal*/);
         else if (playerCanMove && !controllerPauseState)
         {
             fps_Rigidbody.velocity = MoveDirection + (Vector3.up * yVelocity);

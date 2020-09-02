@@ -9,7 +9,7 @@ public class WaterBehaviour : MonoBehaviour
         if (other.CompareTag("Player"))
         {
             FirstPersonAIO player = other.GetComponent<FirstPersonAIO>();
-            player.advanced.gravityMultiplier = 0.2f;
+            player.advanced.gravityMultiplier = 0.8f;
             player.IsInWater = true;
         }
     }

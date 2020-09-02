@@ -8,13 +8,14 @@ public class Trigger : MonoBehaviour
 {
     [SerializeField] private bool _hasOnlyAudio;
     [SerializeField] private bool _hasCutScene;
-
     [SerializeField] private bool _freezPlayer;
+    [SerializeField] private bool _death;
 
     private AudioSource _audioSource;
     private PlayableDirector _director;
 
     private FirstPersonAIO _player;
+    private UIManager _uiManager;
 
     void Start()
     {
@@ -25,6 +26,10 @@ public class Trigger : MonoBehaviour
         else if (_hasCutScene)
         {
             _director = this.GetComponent<PlayableDirector>();
+        }
+        if (_death)
+        {
+            _uiManager = (UIManager)FindObjectOfType(typeof(UIManager));
         }
     }
 
@@ -42,6 +47,10 @@ public class Trigger : MonoBehaviour
                 _director.Play();
                 StartCoroutine(RemoveScript((float)_director.duration));
             }
+            else if (_death)
+            {
+                _uiManager.Dead();
+            }
 
             if (_freezPlayer)
             {
@@ -54,7 +63,7 @@ public class Trigger : MonoBehaviour
     private IEnumerator RemoveScript(float length)
     {
         yield return new WaitForSeconds(length);
-        Destroy(this);
         _player.playerCanMove = true;
+        Destroy(this);
     }
 }
