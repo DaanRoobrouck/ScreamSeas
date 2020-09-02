@@ -243,6 +243,13 @@ public class FirstPersonAIO : MonoBehaviour {
 
     #endregion
 
+    #region Additional Settings
+
+    public bool Targetable = true;
+    public bool IsInWater = false;
+
+    #endregion
+
     #endregion
 
     private void Awake(){
@@ -490,14 +497,17 @@ public class FirstPersonAIO : MonoBehaviour {
             }
         }
 
-            #endregion
+        #endregion
+        if (IsInWater)
+            fps_Rigidbody.velocity = (transform.forward * inputXY.y * speed + transform.right * inputXY.x * walkSpeedInternal);
+        else if (playerCanMove && !controllerPauseState)
+        {
+            fps_Rigidbody.velocity = MoveDirection + (Vector3.up * yVelocity);
 
-        if(playerCanMove && !controllerPauseState){
-          fps_Rigidbody.velocity = MoveDirection+(Vector3.up * yVelocity);
+        }
+        else { fps_Rigidbody.velocity = Vector3.zero; }
 
-        } else{fps_Rigidbody.velocity = Vector3.zero;}
-
-        if(inputXY.magnitude > 0 || !IsGrounded) {
+        if(inputXY.magnitude > 0 || !IsGrounded || IsInWater) {
             capsule.sharedMaterial = advanced.zeroFrictionMaterial;
         } else { capsule.sharedMaterial = advanced.highFrictionMaterial; }
   
