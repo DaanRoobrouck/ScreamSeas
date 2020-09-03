@@ -19,3 +19,5 @@ Takenlijst:
 -Kannibalenprops maken (ventje, houten pieken, touwen, afschrikwekkende totems)
 -houten balken
 -stenen fixen
+-tekst waarom speler niet in het water kan
+
