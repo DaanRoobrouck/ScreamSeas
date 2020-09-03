@@ -63,7 +63,10 @@ public class Trigger : MonoBehaviour
     private IEnumerator RemoveScript(float length)
     {
         yield return new WaitForSeconds(length);
-        _player.playerCanMove = true;
+        if (_player != null)
+        {
+            _player.playerCanMove = true;
+        }       
         Destroy(this);
     }
 }
