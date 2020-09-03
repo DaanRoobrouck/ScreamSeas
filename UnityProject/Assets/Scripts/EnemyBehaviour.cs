@@ -8,13 +8,18 @@ public class EnemyBehaviour : MonoBehaviour
     [SerializeField] private bool _canWalk;
     [SerializeField] Transform[] _waypoints;
 
-    [SerializeField] private float _movementSpeed = 5f;
+    [SerializeField] private float _walkSpeed = 1f;
+    [SerializeField] private float _runSpeed = 2f;
     [SerializeField] private float _waitTime = 5f;
     [SerializeField] private float _deadTime = 2f;
     [SerializeField] private float _fieldOfViewAngle = 120f;
     [SerializeField] private float _detectRange = 3f;
     [SerializeField] private FirstPersonAIO _player;
     [SerializeField] private Transform _enemy;
+
+    [SerializeField] private Animator _animator;
+
+    [SerializeField] private Transform _enemyFace;
 
     private Transform _gotoWaypoint;
     private int _currentIndex = 1;
@@ -39,6 +44,8 @@ public class EnemyBehaviour : MonoBehaviour
         {
             if (_foundPlayer)
             {
+                _animator.SetBool("isWalking", false);
+                _animator.SetBool("isRunning", true);
                 WalkToPlayer();
             }
             else
@@ -46,10 +53,13 @@ public class EnemyBehaviour : MonoBehaviour
                 CheckForPlayer();
                 if (!_hasLooked)
                 {
+                    _animator.SetBool("isWalking", false);
+                    _animator.SetBool("isRunning", false);
                     LookAtNextWaypoint();
                 }
                 else if (_canWalk)
                 {
+                    _animator.SetBool("isWalking", true);
                     WalkToNextWaypoint();
                 }
             }
@@ -58,7 +68,7 @@ public class EnemyBehaviour : MonoBehaviour
 
     private void WalkToPlayer()
     {
-        _enemy.transform.position = Vector3.MoveTowards(_enemy.transform.position, _player.transform.position, _movementSpeed * Time.deltaTime);
+        _enemy.transform.position = Vector3.MoveTowards(_enemy.transform.position, _player.transform.position, _runSpeed * Time.deltaTime);
         _enemy.transform.LookAt(_player.transform);
 
         if (!_player.Targetable)
@@ -68,11 +78,17 @@ public class EnemyBehaviour : MonoBehaviour
 
         if (Vector3.Distance(_enemy.transform.position, _player.transform.position) < 1f)
         {
+            _animator.SetBool("isRunning", false);
+
             _killedPlayer = true;
             _player.playerCanMove = false;
             _player.enableCameraMovement = false;
-            _player.transform.LookAt(_enemy.transform.GetChild(0).transform);
+            _player.transform.LookAt(_enemyFace);
             StartCoroutine(ShowDeadScreen());        
+        }
+        else
+        {
+            _animator.SetBool("isRunning", true);
         }
     }
 
@@ -111,7 +127,7 @@ public class EnemyBehaviour : MonoBehaviour
 
     private void WalkToNextWaypoint()
     {
-        _enemy.transform.position = Vector3.MoveTowards(_enemy.transform.position, _gotoWaypoint.position, _movementSpeed * Time.deltaTime);
+        _enemy.transform.position = Vector3.MoveTowards(_enemy.transform.position, _gotoWaypoint.position, _walkSpeed * Time.deltaTime);
 
         if (Vector3.Distance(_enemy.transform.position, _gotoWaypoint.position) < 0.1f)
         {
