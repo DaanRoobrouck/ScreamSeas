@@ -54,7 +54,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1672191711981876454}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: -0.706, z: 0}
+  m_LocalPosition: {x: 0, y: -0.067, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 3045513421563822004}
@@ -144,7 +144,7 @@ MonoBehaviour:
   - {fileID: 1672191713369449717}
   - {fileID: 1672191711679703731}
   _walkSpeed: 1
-  _runSpeed: 2
+  _runSpeed: 4
   _waitTime: 3
   _deadTime: 2
   _fieldOfViewAngle: 160
@@ -183,6 +183,31 @@ Transform:
   m_Father: {fileID: 1672191713088044154}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2542032783191570567
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2380160093880493326}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e3b7174f8f290c44880e1afeda2d09ce, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  EnableFeetIk: 1
+  _heightFromGroundRaycast: 1.14
+  _raycastDownDistance: 1.5
+  _environmentLayer:
+    serializedVersion: 2
+    m_Bits: 1
+  _pelvisOffset: 0
+  _pelvisUpAndDownSpeed: 0.28
+  _feetToIkPositionSpeed: 0.5
+  LeftFootAnimVariableName: LeftFootCurve
+  RightFootAnimVariableName: RightFootCurve
+  UseProIkFeature: 1
+  ShowSolverDebug: 1
 --- !u!1001 &8778970912347323243
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -208,7 +233,7 @@ PrefabInstance:
     - target: {fileID: 6023280664685315295, guid: 563e4a05a4cc63246976e9ae3885e169,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: 0.38
       objectReference: {fileID: 0}
     - target: {fileID: 6023280664685315295, guid: 563e4a05a4cc63246976e9ae3885e169,
         type: 3}
@@ -277,6 +302,12 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 563e4a05a4cc63246976e9ae3885e169, type: 3}
+--- !u!1 &2380160093880493326 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6403324232364482149, guid: 563e4a05a4cc63246976e9ae3885e169,
+    type: 3}
+  m_PrefabInstance: {fileID: 8778970912347323243}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &3045513421563822004 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6023280664685315295, guid: 563e4a05a4cc63246976e9ae3885e169,
