@@ -74,6 +74,7 @@ public class EnemyBehaviour : MonoBehaviour
         if (!_player.Targetable)
         {
             _foundPlayer = false;
+            _enemy.LookAt(_gotoWaypoint.transform);
         }
 
         if (Vector3.Distance(_enemy.transform.position, _player.transform.position) < 1f)
