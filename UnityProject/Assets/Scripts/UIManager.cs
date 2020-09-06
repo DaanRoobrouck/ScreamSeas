@@ -30,9 +30,14 @@ public class UIManager : MonoBehaviour
     [SerializeField] private float _showCounterTime = 3;
     private Color _countColor;
 
+    private AudioSource _audioSource;
+    [SerializeField] private AudioClip _deadClip;
+    [SerializeField] private AudioClip _glowStickClip;
+
     private void Start()
     {
         _countColor = _glowstickCountText.color;
+        _audioSource = this.GetComponent<AudioSource>();
     }
     private void Update()
     {
@@ -63,6 +68,9 @@ public class UIManager : MonoBehaviour
     {
         //UI
         _deadPanel.SetActive(true);
+
+        //Sound
+        _audioSource.PlayOneShot(_deadClip);
 
         //Player
         _player.transform.position = _waypointManager.ActiveWaypoint.position;
@@ -101,6 +109,9 @@ public class UIManager : MonoBehaviour
 
     public void ShowGlowstickAmount(int amount)
     {
+        //Sound
+        _audioSource.PlayOneShot(_glowStickClip);
+
         _glowstickCountText.text = amount.ToString();
         _glowstickCountText.color = _countColor;
         _glowstickCountPanel.SetActive(true);

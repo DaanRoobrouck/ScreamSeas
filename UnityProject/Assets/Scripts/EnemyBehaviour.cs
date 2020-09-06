@@ -31,11 +31,15 @@ public class EnemyBehaviour : MonoBehaviour
     private bool _killedPlayer = false;
 
     private UIManager _uiManager;
+    private AudioSource _audioSource;
+    [SerializeField] private AudioClip _noticeClip;
+    [SerializeField] private AudioClip _killClip;
 
     void Start()
     {
         _gotoWaypoint = _waypoints[1];
         _uiManager = (UIManager)FindObjectOfType(typeof(UIManager));
+        _audioSource = this.GetComponent<AudioSource>();
     }
 
     void Update()
@@ -79,6 +83,7 @@ public class EnemyBehaviour : MonoBehaviour
 
         if (Vector3.Distance(_enemy.transform.position, _player.transform.position) < 1f)
         {
+            _audioSource.PlayOneShot(_killClip);
             _animator.SetBool("isRunning", false);
 
             _killedPlayer = true;
@@ -123,6 +128,7 @@ public class EnemyBehaviour : MonoBehaviour
             _foundPlayer = true;
 
             //play sound
+            _audioSource.PlayOneShot(_noticeClip);
         }
     }
 
