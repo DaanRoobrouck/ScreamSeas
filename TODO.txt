@@ -22,15 +22,10 @@ Takenlijst:
 -tekst waarom speler niet in het water kan
 
 
-IK
-Dak op grot
 lichten fixen
 cutscene fixen 
-brug
-walkpath smoother maken
+
 sound implement
 onderwater zwemmen
 caught camera fixen (fixed)
-eiland maken
-Dead trigger op de brug
 
