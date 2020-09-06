@@ -4,13 +4,20 @@ using UnityEngine;
 
 public class WaterBehaviour : MonoBehaviour
 {
+    private AudioSource _audioSource;
+    private void Start()
+    {
+        _audioSource = this.GetComponent<AudioSource>();
+    }
     private void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Player"))
         {
             FirstPersonAIO player = other.GetComponent<FirstPersonAIO>();
-            player.advanced.gravityMultiplier = 0.8f;
-            player.IsInWater = true;
+            player.advanced.gravityMultiplier = 0.7f;
+            //player.IsInWater = true;
+
+            _audioSource.Play();
         }
     }
 
@@ -20,7 +27,7 @@ public class WaterBehaviour : MonoBehaviour
         {
             FirstPersonAIO player = other.GetComponent<FirstPersonAIO>();
             player.advanced.gravityMultiplier = 1f;
-            player.IsInWater = false;
+            //player.IsInWater = false;
         }
     }
 }
