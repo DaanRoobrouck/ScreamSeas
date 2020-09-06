@@ -147,15 +147,15 @@ MonoBehaviour:
   _walkSpeed: 1
   _runSpeed: 4
   _waitTime: 3
-  _deadTime: 2
+  _deadTime: 4
   _fieldOfViewAngle: 160
   _detectRange: 10
   _player: {fileID: 0}
   _enemy: {fileID: 1672191711981876453}
   _animator: {fileID: 8981297538418288078}
   _enemyFace: {fileID: 4859262534441834766}
-  _noticeClip: {fileID: 8300000, guid: b3e9350f02da67644b2872d72f583b76, type: 3}
-  _killClip: {fileID: 8300000, guid: b3e9350f02da67644b2872d72f583b76, type: 3}
+  _noticeClip: {fileID: 8300000, guid: 9f0f8835687abd945b25102914494d07, type: 3}
+  _killClip: {fileID: 8300000, guid: 08e41e6bccf2daa41ab769587a51c69e, type: 3}
 --- !u!82 &6760705918156300000
 AudioSource:
   m_ObjectHideFlags: 0

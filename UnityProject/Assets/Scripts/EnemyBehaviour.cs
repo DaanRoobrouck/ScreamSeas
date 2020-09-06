@@ -128,6 +128,7 @@ public class EnemyBehaviour : MonoBehaviour
             _foundPlayer = true;
 
             //play sound
+            _audioSource.Stop();
             _audioSource.PlayOneShot(_noticeClip);
         }
     }

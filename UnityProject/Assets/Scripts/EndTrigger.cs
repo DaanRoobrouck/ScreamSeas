@@ -22,6 +22,7 @@ public class EndTrigger : MonoBehaviour
             _cam.SetActive(true);
 
             _playerBehaviour = other.GetComponent<FirstPersonAIO>();
+            _playerBehaviour.Targetable = false;
             _playerBehaviour.playerCanMove = false;
             _playerBehaviour.lockAndHideCursor = false;
             _playerBehaviour.enableCameraMovement = false;

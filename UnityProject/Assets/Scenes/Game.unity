@@ -10001,7 +10001,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &323405557
 Transform:
   m_ObjectHideFlags: 0
@@ -19596,6 +19596,7 @@ Transform:
   - {fileID: 1471534168}
   - {fileID: 696574737}
   - {fileID: 294018325}
+  - {fileID: 1165875034}
   m_Father: {fileID: 0}
   m_RootOrder: 17
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -33721,6 +33722,64 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 1162808642}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1165875033
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1165875034}
+  - component: {fileID: 1165875036}
+  - component: {fileID: 1165875035}
+  m_Layer: 0
+  m_Name: GameObject
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1165875034
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1165875033}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -0.75, y: 0, z: -26.75}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 727684777}
+  m_RootOrder: 7
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1165875035
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1165875033}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 78169a5e021b2ca4393b4ac979ee2e93, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _talkingText: Press E to use glowsticks
+--- !u!65 &1165875036
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1165875033}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 6.504462, y: 5.7652335, z: 2.6525707}
+  m_Center: {x: 0, y: 0, z: -0.82628536}
 --- !u!1 &1166527637
 GameObject:
   m_ObjectHideFlags: 0
@@ -47905,7 +47964,7 @@ MonoBehaviour:
   _glowStickTimer: 15
   _countDirector: {fileID: 2011149147}
   _showCounterTime: 3
-  _deadClip: {fileID: 8300000, guid: b3e9350f02da67644b2872d72f583b76, type: 3}
+  _deadClip: {fileID: 8300000, guid: 858b88d93daad7942ad9dc6fbfe7ffbc, type: 3}
   _glowStickClip: {fileID: 8300000, guid: b3e9350f02da67644b2872d72f583b76, type: 3}
 --- !u!114 &1654514840
 MonoBehaviour:
@@ -58433,7 +58492,7 @@ AudioSource:
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 24300002, guid: c466f076ce50abc4c84932720ff3415e,
     type: 2}
-  m_audioClip: {fileID: 8300000, guid: b3e9350f02da67644b2872d72f583b76, type: 3}
+  m_audioClip: {fileID: 8300000, guid: 3c808a0bbbfe33f408e50e0a6be953ac, type: 3}
   m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
